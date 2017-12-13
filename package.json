@@ -1,0 +1,11 @@
+{
+    "name": "yeet-bot",
+    "version": "1.0.0",
+    "description": "Dab on them haters",
+    "main": "yeet.js",
+    "author": "William Pelrine",
+    "dependencies": {
+        "discord.io": "^2.5.3",
+        "winston": "^2.4.0"
+    }
+}
