@@ -8,7 +8,7 @@ const client = new Discord.Client();
 
 // Say hi
 client.on('ready', () => {
-  console.log('Dab on them haters.')
+  console.log('Dabbing on them haters.')
 });
   
 // Create an event listener for new guild members

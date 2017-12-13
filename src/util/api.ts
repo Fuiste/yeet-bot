@@ -6,14 +6,14 @@ export interface ApiCallConfig {
 }
 
 export class Api {
-  constructor(public debug?: boolean) {if (!debug) {this.debug = false}}
+  constructor(public host: string, public debug?: boolean) {if (!debug) {this.debug = false}}
 
-  private async _call(url: any, config: ApiCallConfig): Promise<any> {
+  private async _call(endpoint: any, config: ApiCallConfig): Promise<any> {
     if (this.debug) {
-      console.log(`[API] - ${config.method.toUpperCase()} - ${url}`)
+      console.log(`[API] - ${config.method.toUpperCase()} - ${this.host + endpoint}`)
     }
 
-    let req = request(config.method, url)
+    let req = request(config.method, this.host + endpoint)
     if (config.body) {
       req = req.send(config.body)
     }
