@@ -1,7 +1,8 @@
 import * as Discord from 'discord.js'
+import * as Express from 'express'
 
 import { runCommand } from './command'
-import { DISCORD_TOKEN } from './environment'
+import { DISCORD_TOKEN, PORT } from './environment'
 
 // Init client
 const client = new Discord.Client();
@@ -24,7 +25,23 @@ client.on('message', msg => {
       runCommand(msg, 'say', [])
     }
   }
-});
+})
 
 // Log our bot in
 client.login(DISCORD_TOKEN);
+
+// Set up a webserver for monitoring
+const app = Express();
+
+app.disable('x-powered-by');
+
+app.all('*', (req, res) => {
+  if (req.url === '/status') {
+    // Health check
+    res.status(200)
+    res.contentType('text/plain')
+    res.send("OK")
+  }
+})
+
+app.listen(PORT, () => console.log("Yeet server is running :)"))

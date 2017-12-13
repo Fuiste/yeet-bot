@@ -1,1 +1,1 @@
-worker: node dist/yeet.js
+web: node dist/yeet.js

@@ -12,12 +12,14 @@
     "author": "William Pelrine",
     "dependencies": {
         "discord.js": "^11.2.1",
-        "superagent": "^3.8.2",
-        "winston": "^2.4.0",
+        "express": "^4.16.2",
         "rimraf": "^2.6.1",
-        "typescript": "^2.4.2"
+        "superagent": "^3.8.2",
+        "typescript": "^2.4.2",
+        "winston": "^2.4.0"
     },
     "devDependencies": {
+        "@types/express": "^4.0.39",
         "@types/superagent": "^3.5.6"
     }
 }
