@@ -3,7 +3,7 @@ import { formatCoin, getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
 
 export function runCommand(message: Message, command: string, args: string[]) {
-  console.log('Running', command, 'with args:', args)
+  console.log('Running "' + command + '" with args:', args)
 
   switch(command.toLowerCase()) {
     case 'crypto':

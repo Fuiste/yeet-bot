@@ -18,7 +18,11 @@ client.on('message', msg => {
     args.shift()  // Remove '!yeet'
     let cmd = args.shift()
 
-    runCommand(msg, cmd, args)
+    if (cmd) {
+      runCommand(msg, cmd, args)
+    } else {
+      runCommand(msg, 'say', [])
+    }
   }
 });
 
