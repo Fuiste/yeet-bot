@@ -5,7 +5,6 @@ import { DISCORD_TOKEN } from './environment'
 
 // Init client
 const client = new Discord.Client();
-const succDab = '<:dab:390534211632627713>';
 
 // Say hi
 client.on('ready', () => {
@@ -14,18 +13,12 @@ client.on('ready', () => {
   
 // Create an event listener for new guild members
 client.on('message', msg => {
-  if (msg.content.substring(0, 1) === '!yeet') {
+  if (msg.content.substring(0, 5) === '!yeet') {
     let args = msg.content.split(' ')
     args.shift()  // Remove '!yeet'
     let cmd = args.shift()
 
-    console.log(cmd)
-    console.log(args)
-    runCommand(cmd, args)
-  } else {
-    if (msg.content.includes('yeet')) {
-      msg.channel.send(succDab)
-    }
+    runCommand(msg, cmd, args)
   }
 });
 
