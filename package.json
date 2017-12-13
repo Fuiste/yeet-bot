@@ -3,9 +3,20 @@
     "version": "1.0.0",
     "description": "Dab on them haters",
     "main": "yeet.js",
+    "scripts": {
+        "build": "npm run clean && tsc",
+        "build.watch": "npm run clean && tsc --watch",
+        "clean": "rimraf dist"
+    },
     "author": "William Pelrine",
     "dependencies": {
         "discord.js": "^11.2.1",
-        "winston": "^2.4.0"
+        "superagent": "^3.8.2",
+        "winston": "^2.4.0",
+        "rimraf": "^2.6.1",
+        "typescript": "^2.4.2"
+    },
+    "devDependencies": {
+        "@types/superagent": "^3.5.6"
     }
 }

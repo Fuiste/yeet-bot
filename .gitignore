@@ -1,0 +1,10 @@
+*~
+*.sw[mnpcod]
+*.log
+*.lock
+*.tmp
+log.txt
+.DS_Store
+.swp
+node_modules
+credentials
