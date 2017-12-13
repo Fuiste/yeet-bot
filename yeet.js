@@ -1,42 +1,26 @@
-var Discord = require('discord.io');
-var logger = require('winston');
+var Discord = require('discord.js');
 
-// Init auth
-const auth = process.env.DISCORD_TOKEN || 'fake';
+// Init client
+const client = new Discord.Client();
+const tok = process.env.DISCORD_TOKEN;
+const succDab = '<:dab:390534211632627713>';
 
-// Configure logger
-logger.remove(logger.transports.Console);
-logger.add(logger.transports.Console, {colorize: true});
-logger.level = 'debug';
+/**
+ * TO ADD:
+ * https://discordapp.com/oauth2/authorize?&client_id=390535530800218115&scope=bot&permissions=0
+ */
 
-// Initialize Bot
-var bot = new Discord.Client({
-   token: auth,
-   autorun: true
+// Say hi
+client.on('ready', () => {
+  console.log('Dab on them haters.');
+});
+  
+// Create an event listener for new guild members
+client.on('message', msg => {
+  if (msg.content.includes('yeet')) {
+    msg.channel.send(succDab);
+  }
 });
 
-bot.on('ready', function (evt) {
-    logger.info('Connected');
-    logger.info('Dabbing as: ');
-    logger.info(bot.username + ' - (' + bot.id + ')');
-});
-bot.on('message', function (user, userID, channelID, message, evt) {
-    // Our bot needs to know if it will execute a command
-    // It will listen for messages that will start with `!`
-    if (message.substring(0, 1) == '!') {
-        var args = message.substring(1).split(' ');
-        var cmd = args[0];
-       
-        args = args.splice(1);
-        switch(cmd) {
-            // !ping
-            case 'ping':
-                bot.sendMessage({
-                    to: channelID,
-                    message: 'Pong!'
-                });
-            break;
-            // Just add any case commands if you want to..
-         }
-     }
-});
+// Log our bot in
+client.login(tok);
