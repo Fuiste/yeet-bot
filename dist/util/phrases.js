@@ -32,9 +32,8 @@ function handlePhraseTriggers(content) {
         }
         try {
             let keys = yield client.keys(PHRASE_PREFIX);
-            console.log(keys);
             for (let phrase in keys) {
-                if (content.toLowerCase().includes(phrase)) {
+                if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
                     resps.push(yield client.get(phrase));
                 }
             }

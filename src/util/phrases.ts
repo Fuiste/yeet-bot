@@ -27,9 +27,9 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
 
   try {
     let keys = await client.keys(PHRASE_PREFIX)
-    console.log(keys)
+
     for (let phrase in keys) {
-      if (content.toLowerCase().includes(phrase)) {
+      if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
         resps.push(await client.get(phrase))
       }
     }
