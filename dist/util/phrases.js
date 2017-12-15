@@ -34,10 +34,10 @@ function handlePhraseTriggers(content) {
             let keys = yield client.keys(PHRASE_PREFIX);
             console.log(keys);
             for (let i in keys) {
+                console.log("FOR KEY: " + keys[i].substring(PHRASE_PREFIX.length - 1));
                 if (content.toLowerCase().includes(keys[i].substring(PHRASE_PREFIX.length - 1))) {
                     let match = yield client.get(keys[i].substring(PHRASE_PREFIX.length - 1));
                     console.log("FOUND: " + match);
-                    console.log("FOR KEY: " + keys[i].substring(PHRASE_PREFIX.length - 1));
                 }
             }
         }
