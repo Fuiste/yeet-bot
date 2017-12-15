@@ -33,12 +33,11 @@ function handlePhraseTriggers(content) {
         try {
             let keys = yield client.keys(PHRASE_PREFIX);
             console.log(keys);
-            for (let phrase in keys) {
-                if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
-                    let match = yield client.get(phrase.substring(PHRASE_PREFIX.length - 1));
+            for (let i in keys) {
+                if (content.toLowerCase().includes(keys[i].substring(PHRASE_PREFIX.length - 1))) {
+                    let match = yield client.get(keys[i].substring(PHRASE_PREFIX.length - 1));
                     console.log("FOUND: " + match);
-                    console.log("FOR PH: " + phrase);
-                    console.log("FOR KEY: " + phrase.substring(PHRASE_PREFIX.length - 1));
+                    console.log("FOR KEY: " + keys[i].substring(PHRASE_PREFIX.length - 1));
                 }
             }
         }
