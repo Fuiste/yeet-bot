@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_1 = require("./util/crypto");
 const emoji_1 = require("./util/emoji");
-const phrases_1 = require("./util/phrases");
+// import { learnPhrase } from './util/phrases'
 function runCommand(message, command, args) {
     console.log('Running "' + command + '" with args:', args || 'none');
     switch (command.toLowerCase()) {
@@ -55,7 +55,7 @@ function learn(message, args) {
         message.channel.send("You need to send me a **phrase** and a **response**...");
     }
     else {
-        phrases_1.learnPhrase(newPhrase[0].substring(1, newPhrase[0].length - 1), newPhrase[1].substring(1, newPhrase[1].length - 1));
+        // learnPhrase(newPhrase[0].substring(1, newPhrase[0].length - 1), newPhrase[1].substring(1, newPhrase[1].length - 1))
         message.channel.send("Got it, for the next 24 hours, when someone says, \"" + newPhrase[0] + "\" I'll say, \"" + newPhrase[1] + "\"");
     }
 }

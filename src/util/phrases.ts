@@ -41,5 +41,5 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
 }
 
 export function learnPhrase(key: string, value: string) {
-  client.setCached(key, value)
+  client.setCached(key, value)        
 }
