@@ -3,3 +3,4 @@
  * @param content the message content to scan
  */
 export declare function handlePhraseTriggers(content: string): Promise<string[]>;
+export declare function learnPhrase(key: string, value: string): void;

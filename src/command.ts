@@ -1,6 +1,8 @@
 import { Message } from 'discord.js'
+
 import { formatCoin, getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
+import { learnPhrase } from './util/phrases'
 
 export function runCommand(message: Message, command: string, args?: string) {
   console.log('Running "' + command + '" with args:', args || 'none')
@@ -51,16 +53,13 @@ function learn(message: Message, args?: string) {
   let newPhrase = args.match(/("([^"]|"")*")/g)
 
   if (!newPhrase) {
-    message.channel.send("Teach me to listen for phrases like this:\n\n!yeet learn \"Sheldor\" \"Bazinga Zimbabwe\"")
-    return
-  }
-  
-  if (newPhrase.length !== 2) {
+    message.channel.send("Teach me to listen for phrases like this:\n\n`!yeet learn \"Sheldor\", \"Bazinga Zimbabwe\"`")
+  } else if (newPhrase.length !== 2) {
     message.channel.send("You need to send me a **phrase** and a **response**...")
-    return
+  } else {
+    learnPhrase(newPhrase[0], newPhrase[1])
+    message.channel.send("Got it, for the next 24 hours, when someone says, \"" + newPhrase[0] + "\" I'll say, \"" + newPhrase[1] + "\"")
   }
-
-  message.channel.send(newPhrase[0] + ' - ' + newPhrase[1])
 }
 
 function say(message: Message, note?: string) {

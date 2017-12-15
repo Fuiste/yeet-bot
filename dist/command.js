@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_1 = require("./util/crypto");
 const emoji_1 = require("./util/emoji");
+const phrases_1 = require("./util/phrases");
 function runCommand(message, command, args) {
     console.log('Running "' + command + '" with args:', args || 'none');
     switch (command.toLowerCase()) {
@@ -48,14 +49,15 @@ function learn(message, args) {
     // Regex out the quotes to learn
     let newPhrase = args.match(/("([^"]|"")*")/g);
     if (!newPhrase) {
-        message.channel.send("Teach me to listen for phrases like this:\n\n!yeet learn \"Sheldor\" \"Bazinga Zimbabwe\"");
-        return;
+        message.channel.send("Teach me to listen for phrases like this:\n\n`!yeet learn \"Sheldor\", \"Bazinga Zimbabwe\"`");
     }
-    if (newPhrase.length !== 2) {
+    else if (newPhrase.length !== 2) {
         message.channel.send("You need to send me a **phrase** and a **response**...");
-        return;
     }
-    message.channel.send(newPhrase[0] + ' - ' + newPhrase[1]);
+    else {
+        phrases_1.learnPhrase(newPhrase[0], newPhrase[1]);
+        message.channel.send("Got it, for the next 24 hours, when someone says, \"" + newPhrase[0] + "\" I'll say, \"" + newPhrase[1] + "\"");
+    }
 }
 function say(message, note) {
     if (note) {

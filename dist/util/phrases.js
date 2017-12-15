@@ -45,3 +45,7 @@ function handlePhraseTriggers(content) {
     });
 }
 exports.handlePhraseTriggers = handlePhraseTriggers;
+function learnPhrase(key, value) {
+    client.setCached(key, value);
+}
+exports.learnPhrase = learnPhrase;

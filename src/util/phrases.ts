@@ -38,3 +38,7 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
 
   return resps
 }
+
+export function learnPhrase(key: string, value: string) {
+  client.setCached(key, value)
+}
