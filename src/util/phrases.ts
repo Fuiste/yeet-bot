@@ -33,6 +33,7 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
       if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
         let match = await client.get(phrase.substring(PHRASE_PREFIX.length - 1))
         console.log("FOUND: " + match)
+        console.log("FOR PH: " + phrase)
         console.log("FOR KEY: " + phrase.substring(PHRASE_PREFIX.length - 1))
       }
     }
