@@ -48,6 +48,10 @@ function learn(message: Message, args?: string) {
 
   // Regex out the quotes to learn
   let newPhrase = args.match(/("([^"]|"")*")/g)
+
+  if (!newPhrase) {
+    message.channel.send("Teach me to listen for phrases like this:\n\n!yeet learn \"Sheldor\" \"Bazinga Zimbabwe\"")
+  }
   
   if (newPhrase.length !== 2) {
     message.channel.send("You need to send me a **phrase** and a **response**...")
