@@ -36,6 +36,7 @@ function handlePhraseTriggers(content) {
                 if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
                     let match = yield client.get(phrase.substring(PHRASE_PREFIX.length - 1));
                     console.log("FOUND: " + match);
+                    console.log("FOR KEY: " + phrase.substring(PHRASE_PREFIX.length - 1));
                 }
             }
         }
