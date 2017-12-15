@@ -58,7 +58,7 @@ function learn(message, args) {
         phrases_1.learnPhrase(newPhrase[0].substring(1, newPhrase[0].length - 1), newPhrase[1].substring(1, newPhrase[1].length - 1));
         message.channel.send("Got it, for the next 24 hours, when someone says, \"" +
             newPhrase[0].substring(1, newPhrase[0].length - 1) + "\" I'll say, \"" +
-            newPhrase[1].substring(1, newPhrase[0].length - 1) + "\"");
+            newPhrase[1].substring(1, newPhrase[1].length - 1) + "\"");
     }
 }
 function say(message, note) {
