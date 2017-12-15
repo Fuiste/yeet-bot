@@ -34,7 +34,8 @@ function handlePhraseTriggers(content) {
             let keys = yield client.keys(PHRASE_PREFIX);
             for (let phrase in keys) {
                 if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
-                    resps.push(yield client.get(phrase));
+                    let match = yield client.get(phrase);
+                    console.log("FOUND: " + match);
                 }
             }
         }
