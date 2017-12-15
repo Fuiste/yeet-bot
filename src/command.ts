@@ -44,6 +44,7 @@ function crypto(message: Message, currency?: string) {
 function learn(message: Message, args?: string) {
   if (!args) {
     message.channel.send("Teach me to listen for phrases like this:\n\n!yeet learn \"Sheldor\" \"Bazinga Zimbabwe\"")
+    return
   }
 
   // Regex out the quotes to learn
@@ -51,10 +52,12 @@ function learn(message: Message, args?: string) {
 
   if (!newPhrase) {
     message.channel.send("Teach me to listen for phrases like this:\n\n!yeet learn \"Sheldor\" \"Bazinga Zimbabwe\"")
+    return
   }
   
   if (newPhrase.length !== 2) {
     message.channel.send("You need to send me a **phrase** and a **response**...")
+    return
   }
 
   message.channel.send(newPhrase[0] + ' - ' + newPhrase[1])
