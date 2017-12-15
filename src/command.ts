@@ -57,7 +57,7 @@ function learn(message: Message, args?: string) {
   } else if (newPhrase.length !== 2) {
     message.channel.send("You need to send me a **phrase** and a **response**...")
   } else {
-    learnPhrase(newPhrase[0], newPhrase[1])
+    learnPhrase(newPhrase[0].replace('"', ''), newPhrase[1].replace('"', ''))
     message.channel.send("Got it, for the next 24 hours, when someone says, \"" + newPhrase[0] + "\" I'll say, \"" + newPhrase[1] + "\"")
   }
 }
