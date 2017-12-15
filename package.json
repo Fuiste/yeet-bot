@@ -13,6 +13,7 @@
     "dependencies": {
         "discord.js": "^11.2.1",
         "express": "^4.16.2",
+        "redis": "^2.8.0",
         "rimraf": "^2.6.1",
         "superagent": "^3.8.2",
         "typescript": "^2.4.2",
@@ -20,6 +21,7 @@
     },
     "devDependencies": {
         "@types/express": "^4.0.39",
+        "@types/redis": "^2.8.3",
         "@types/superagent": "^3.5.6"
     }
 }
