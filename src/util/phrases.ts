@@ -37,7 +37,6 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
   } catch(e) {
     throw e
   }
-
   return resps
 }
 
