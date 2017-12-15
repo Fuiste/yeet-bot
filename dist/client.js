@@ -22,7 +22,7 @@ exports.client.on('message', msg => {
             command_1.runCommand(msg, 'dab');
         }
     }
-    else if (!msg.content.includes('!yeet')) {
+    else if (!msg.content.includes('!yeet') && !msg.author.bot) {
         phrases_1.handlePhraseTriggers(msg.content).then((res) => {
             res.forEach((r) => {
                 command_1.runCommand(msg, 'say', r);
