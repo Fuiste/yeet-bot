@@ -1,30 +1,43 @@
 # Yeet Bot
 
-This bot dabs on the haters
+This bot's avatar is a dabbing Hatsune Miku and that should tell you all you need to know about how useful it is.
 
 To add it to your channel, go [here](https://discordapp.com/oauth2/authorize?&client_id=390535530800218115&scope=bot&permissions=0).
 
-# Usage
+This bot also runs an Express API for some simple admin controls
+
+# Usage 
 
 ## Commands
 
 All commands are prefixed with `!yeet`
 
-### dab
-
-Throws up a dab on the haters
-
 ### say
 
 Says a thing
+
+**Example:**
+
+```
+!yeet say Vsauce, Bichael here!
+```
 
 ### crypto
 
 Prices out the top 10 cryptocurrencies, you can get more specific info on a currency by specifying a name, for example:
 
+**Examples:**
+
 ```
+!yeet crypto
 !yeet crypto bitcoin
 ```
+
+# API
+
+## `/status`
+
+Returns `OK` if the server is running.
 
 # Develop
 

@@ -1,1 +1,1 @@
-web: node dist/yeet.js
+web: npm run start

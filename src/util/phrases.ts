@@ -11,12 +11,13 @@ const phrases = {
  * though right now that doesn't make a lot of sense.
  * @param content the message content to scan
  */
-export async function handlePhraseTriggers(content: string): Promise<string> {
+export async function handlePhraseTriggers(content: string): Promise<string[]> {
+  let resps = []
   for(let phrase in phrases) {
-    if(content.includes(phrase)) {
-      return phrases[phrase]
+    if(content.toLowerCase().includes(phrase)) {
+      resps.push(phrases[phrase])
     }
   }
 
-  throw null
+  return resps
 }

@@ -24,7 +24,9 @@ client.on('message', msg => {
     }
   } else {
     handlePhraseTriggers(msg.content).then((res) => {
-      runCommand(msg, 'say', [res])
+      res.forEach((r) => {
+        runCommand(msg, 'say', [r])
+      })
     })
   }
 })
