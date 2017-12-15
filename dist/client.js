@@ -11,19 +11,22 @@ exports.client.on('ready', () => {
 // Create an event listener for new guild members
 exports.client.on('message', msg => {
     if (msg.content.substring(0, 5) === '!yeet') {
-        let args = msg.content.split(' ');
-        args.shift(); // Remove '!yeet'
-        let cmd = args.shift();
+        let split = msg.content.split(' ');
+        split.shift(); // Remove '!yeet'
+        let cmd = split.shift();
+        let args = split.join(' ');
         if (cmd) {
             command_1.runCommand(msg, cmd, args);
         }
         else {
-            command_1.runCommand(msg, 'dab', []);
+            command_1.runCommand(msg, 'dab');
         }
     }
     else {
         phrases_1.handlePhraseTriggers(msg.content).then((res) => {
-            command_1.runCommand(msg, 'say', [res]);
+            res.forEach((r) => {
+                command_1.runCommand(msg, 'say', r);
+            });
         });
     }
 });

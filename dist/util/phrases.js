@@ -9,24 +9,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const emoji_1 = require("./emoji");
+const redis_1 = require("./redis");
+const PHRASE_PREFIX = 'triggerphrase_';
 const phrases = {
     "yeet": emoji_1.DAB,
     "energy": "༼ つ ◕_◕ ༽つ TAKE MY ENERGY ༼ つ ◕_◕ ༽つ",
     "fampai": ":3 notice me senpai :3"
 };
+const client = new redis_1.RedisClient(PHRASE_PREFIX);
 /**
- * Returns an auto response based on the content of a message.  It's gonna look in a db eventually so it's async even
- * though right now that doesn't make a lot of sense.
+ * Returns auto response(s) based on the content of a message.
  * @param content the message content to scan
  */
 function handlePhraseTriggers(content) {
     return __awaiter(this, void 0, void 0, function* () {
+        let resps = [];
+        // Check the hardcoded phrases
         for (let phrase in phrases) {
-            if (content.includes(phrase)) {
-                return phrases[phrase];
+            if (content.toLowerCase().includes(phrase)) {
+                resps.push(phrases[phrase]);
             }
         }
-        throw null;
+        try {
+            let keys = yield client.keys(PHRASE_PREFIX);
+            for (let phrase in keys) {
+                if (content.toLowerCase().includes(phrase)) {
+                    resps.push(yield client.get(phrase));
+                }
+            }
+        }
+        catch (e) {
+            throw e;
+        }
+        return resps;
     });
 }
 exports.handlePhraseTriggers = handlePhraseTriggers;

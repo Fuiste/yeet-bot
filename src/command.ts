@@ -2,31 +2,22 @@ import { Message } from 'discord.js'
 import { formatCoin, getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
 
-export function runCommand(message: Message, command: string, args: string[]) {
-  console.log('Running "' + command + '" with args:', args)
+export function runCommand(message: Message, command: string, args?: string) {
+  console.log('Running "' + command + '" with args:', args || 'none')
 
   switch(command.toLowerCase()) {
     case 'crypto':
-      if (args.length > 0) {
-        crypto(message, args[0])
-      } else {
-        crypto(message)
-      }
+      crypto(message, args)
       break
     case 'dab':
       say(message, DAB)
       break
-    case 'say':
-      say(message, args.join(' '))
+    case 'learn':
+      learn(message, args)
       break
-  }
-}
-
-function say(message: Message, note?: string) {
-  if (note) {
-    message.channel.send(note)
-  } else {
-    message.channel.send(DAB + "try that again" + DAB)
+    case 'say':
+      say(message, args)
+      break
   }
 }
 
@@ -47,5 +38,28 @@ function crypto(message: Message, currency?: string) {
     }, () => {
       say(message, "Uh oh... I had some trouble grabbing the info, try again later!")
     })
+  }
+}
+
+function learn(message: Message, args?: string) {
+  if (!args) {
+    message.channel.send("Teach me to listen for phrases like this:\n\n!yeet learn \"Sheldor\" \"Bazinga Zimbabwe\"")
+  }
+
+  // Regex out the quotes to learn
+  let newPhrase = args.match(/("([^"]|"")*")/g)
+  
+  if (newPhrase.length !== 2) {
+    message.channel.send("You need to send me a **phrase** and a **response**...")
+  }
+
+  message.channel.send(newPhrase[0] + ' - ' + newPhrase[1])
+}
+
+function say(message: Message, note?: string) {
+  if (note) {
+    message.channel.send(note)
+  } else {
+    message.channel.send(DAB + "try that again" + DAB)
   }
 }

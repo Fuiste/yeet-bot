@@ -13,19 +13,20 @@ client.on('ready', () => {
 // Create an event listener for new guild members
 client.on('message', msg => {
   if (msg.content.substring(0, 5) === '!yeet') {
-    let args = msg.content.split(' ')
-    args.shift()  // Remove '!yeet'
-    let cmd = args.shift()
+    let split = msg.content.split(' ')
+    split.shift()  // Remove '!yeet'
+    let cmd = split.shift()
+    let args = split.join(' ')
 
     if (cmd) {
       runCommand(msg, cmd, args)
     } else {
-      runCommand(msg, 'dab', [])
+      runCommand(msg, 'dab')
     }
   } else {
     handlePhraseTriggers(msg.content).then((res) => {
       res.forEach((r) => {
-        runCommand(msg, 'say', [r])
+        runCommand(msg, 'say', r)
       })
     })
   }

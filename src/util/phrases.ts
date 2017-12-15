@@ -1,4 +1,7 @@
 import { DAB } from './emoji'
+import { RedisClient } from './redis'
+
+const PHRASE_PREFIX = 'triggerphrase_'
 
 const phrases = {
   "yeet": DAB,
@@ -6,17 +9,31 @@ const phrases = {
   "fampai": ":3 notice me senpai :3"
 }
 
+const client = new RedisClient(PHRASE_PREFIX)
+
 /**
- * Returns an auto response based on the content of a message.  It's gonna look in a db eventually so it's async even
- * though right now that doesn't make a lot of sense.
+ * Returns auto response(s) based on the content of a message.
  * @param content the message content to scan
  */
 export async function handlePhraseTriggers(content: string): Promise<string[]> {
   let resps = []
-  for(let phrase in phrases) {
-    if(content.toLowerCase().includes(phrase)) {
+
+  // Check the hardcoded phrases
+  for (let phrase in phrases) {
+    if (content.toLowerCase().includes(phrase)) {
       resps.push(phrases[phrase])
     }
+  }
+
+  try {
+    let keys = await client.keys(PHRASE_PREFIX)
+    for (let phrase in keys) {
+      if (content.toLowerCase().includes(phrase)) {
+        resps.push(await client.get(phrase))
+      }
+    }
+  } catch(e) {
+    throw e
   }
 
   return resps
