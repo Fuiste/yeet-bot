@@ -30,10 +30,9 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
     console.log(keys)
 
     for (let i in keys) {
-      console.log("FOR KEY: " + keys[i].substring(PHRASE_PREFIX.length - 1))
-      if (content.toLowerCase().includes(keys[i].substring(PHRASE_PREFIX.length - 1))) {
-        let match = await client.get(keys[i].substring(PHRASE_PREFIX.length - 1))
-        console.log("FOUND: " + match)
+      if (content.toLowerCase().includes(keys[i].substring(PHRASE_PREFIX.length))) {
+        let match = await client.get(keys[i].substring(PHRASE_PREFIX.length))
+        resps.push(match)
       }
     }
   } catch(e) {
