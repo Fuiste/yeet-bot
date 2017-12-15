@@ -30,7 +30,7 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
 
     for (let phrase in keys) {
       if (content.toLowerCase().includes(phrase.substring(PHRASE_PREFIX.length - 1))) {
-        let match = await client.get(phrase)
+        let match = await client.get(phrase.substring(PHRASE_PREFIX.length - 1))
         console.log("FOUND: " + match)
       }
     }
