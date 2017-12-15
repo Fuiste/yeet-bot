@@ -1,6 +1,7 @@
 import * as Discord from 'discord.js'
 
 import { runCommand } from './command'
+import { handlePhraseTriggers } from './util/phrases'
 
 export const client = new Discord.Client();
 
@@ -19,7 +20,11 @@ client.on('message', msg => {
     if (cmd) {
       runCommand(msg, cmd, args)
     } else {
-      runCommand(msg, 'say', [])
+      runCommand(msg, 'dab', [])
     }
+  } else {
+    handlePhraseTriggers(msg.content).then((res) => {
+      runCommand(msg, 'say', [res])
+    })
   }
 })

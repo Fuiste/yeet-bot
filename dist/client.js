@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const Discord = require("discord.js");
 const command_1 = require("./command");
+const phrases_1 = require("./util/phrases");
 exports.client = new Discord.Client();
 // Say hi
 exports.client.on('ready', () => {
@@ -17,7 +18,12 @@ exports.client.on('message', msg => {
             command_1.runCommand(msg, cmd, args);
         }
         else {
-            command_1.runCommand(msg, 'say', []);
+            command_1.runCommand(msg, 'dab', []);
         }
+    }
+    else {
+        phrases_1.handlePhraseTriggers(msg.content).then((res) => {
+            command_1.runCommand(msg, 'say', [res]);
+        });
     }
 });
