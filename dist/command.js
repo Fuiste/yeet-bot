@@ -1,7 +1,16 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 const crypto_1 = require("./util/crypto");
 const emoji_1 = require("./util/emoji");
+const memes_1 = require("./util/memes");
 const phrases_1 = require("./util/phrases");
 function runCommand(message, command, args) {
     console.log('Running "' + command + '" with args:', args || 'none');
@@ -14,6 +23,9 @@ function runCommand(message, command, args) {
             break;
         case 'learn':
             learn(message, args);
+            break;
+        case 'meme':
+            meme(message, args);
             break;
         case 'say':
             say(message, args);
@@ -63,6 +75,22 @@ function learn(message, args) {
             newPhrase[0].substring(1, newPhrase[0].length - 1) + "\" I'll say, \"" +
             newPhrase[1].substring(1, newPhrase[1].length - 1) + "\"");
     }
+}
+function meme(message, args) {
+    return __awaiter(this, void 0, void 0, function* () {
+        if (!args) {
+            try {
+                let meme = yield memes_1.getMeme();
+                message.channel.sendEmbed({ url: meme.url, description: `Submitted by ${meme.author}` });
+            }
+            catch (e) {
+                say(message, "Memes are hard right now, try again later");
+            }
+        }
+        else {
+            console.log(message.author.id);
+        }
+    });
 }
 function say(message, note, tts) {
     if (note) {

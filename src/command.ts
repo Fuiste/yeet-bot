@@ -2,6 +2,7 @@ import { Message } from 'discord.js'
 
 import { formatCoin, getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
+import { getMeme } from './util/memes'
 import { learnPhrase } from './util/phrases'
 
 export function runCommand(message: Message, command: string, args?: string) {
@@ -16,6 +17,9 @@ export function runCommand(message: Message, command: string, args?: string) {
       break
     case 'learn':
       learn(message, args)
+      break
+    case 'meme':
+      meme(message, args)
       break
     case 'say':
       say(message, args)
@@ -64,6 +68,19 @@ function learn(message: Message, args?: string) {
     message.channel.send("Got it, for the next 24 hours, when someone says, \"" + 
       newPhrase[0].substring(1, newPhrase[0].length - 1) + "\" I'll say, \"" +
       newPhrase[1].substring(1, newPhrase[1].length - 1) + "\"")
+  }
+}
+
+async function meme(message: Message, args?: string) {
+  if (!args) {
+    try {
+      let meme = await getMeme()
+      message.channel.sendEmbed({url: meme.url, description: `Submitted by ${meme.author}`})
+    } catch(e) {
+      say(message, "Memes are hard right now, try again later")
+    }
+  } else {
+    console.log(message.author.id)
   }
 }
 

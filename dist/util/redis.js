@@ -11,8 +11,12 @@ class RedisClient {
     set(key, value) {
         client.set(this.prefix + key, value);
     }
-    setCached(key, value) {
-        client.setex(this.prefix + key, DAY, value);
+    setCached(key, value, expire) {
+        let ex = DAY;
+        if (expire) {
+            ex = expire;
+        }
+        client.setex(this.prefix + key, ex, value);
     }
     get(key) {
         return new Promise((resolve, reject) => {
