@@ -33,6 +33,26 @@ Prices out the top 10 cryptocurrencies, you can get more specific info on a curr
 !yeet crypto bitcoin
 ```
 
+### learn
+
+Learns a phrase and response for the next 24 hours.
+
+**Example:**
+
+```
+!yeet learn "Is this real life?", "I'm 12 and very scared"
+```
+
+### yell
+
+Like say, but with text to speech.
+
+**Example:**
+
+```
+!yeet yell Say that to my face not online see what happens
+```
+
 # API
 
 ## `/status`
