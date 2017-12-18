@@ -20,6 +20,9 @@ export function runCommand(message: Message, command: string, args?: string) {
     case 'say':
       say(message, args)
       break
+    case 'yell':
+      say(message, args, true)
+      break
   }
 }
 
@@ -64,10 +67,15 @@ function learn(message: Message, args?: string) {
   }
 }
 
-function say(message: Message, note?: string) {
+function say(message: Message, note?: string, tts?: boolean) {
+  let opts
+  if (tts) {
+    opts.tts = true
+  }
+
   if (note) {
-    message.channel.send(note)
+    message.channel.send(note, opts)
   } else {
-    message.channel.send(DAB + "try that again" + DAB)
+    message.channel.send(DAB + "try that again" + DAB, opts)
   }
 }

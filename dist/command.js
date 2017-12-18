@@ -18,6 +18,9 @@ function runCommand(message, command, args) {
         case 'say':
             say(message, args);
             break;
+        case 'yell':
+            say(message, args, true);
+            break;
     }
 }
 exports.runCommand = runCommand;
@@ -61,11 +64,15 @@ function learn(message, args) {
             newPhrase[1].substring(1, newPhrase[1].length - 1) + "\"");
     }
 }
-function say(message, note) {
+function say(message, note, tts) {
+    let opts;
+    if (tts) {
+        opts.tts = true;
+    }
     if (note) {
-        message.channel.send(note);
+        message.channel.send(note, opts);
     }
     else {
-        message.channel.send(emoji_1.DAB + "try that again" + emoji_1.DAB);
+        message.channel.send(emoji_1.DAB + "try that again" + emoji_1.DAB, opts);
     }
 }
