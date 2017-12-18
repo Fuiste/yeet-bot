@@ -65,14 +65,10 @@ function learn(message, args) {
     }
 }
 function say(message, note, tts) {
-    let opts;
-    if (tts) {
-        opts.tts = true;
-    }
     if (note) {
-        message.channel.send(note, opts);
+        message.channel.send(note, { tts: tts });
     }
     else {
-        message.channel.send(emoji_1.DAB + "try that again" + emoji_1.DAB, opts);
+        message.channel.send(emoji_1.DAB + "try that again" + emoji_1.DAB, { tts: tts });
     }
 }

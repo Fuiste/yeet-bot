@@ -68,14 +68,9 @@ function learn(message: Message, args?: string) {
 }
 
 function say(message: Message, note?: string, tts?: boolean) {
-  let opts
-  if (tts) {
-    opts.tts = true
-  }
-
   if (note) {
-    message.channel.send(note, opts)
+    message.channel.send(note, {tts: tts})
   } else {
-    message.channel.send(DAB + "try that again" + DAB, opts)
+    message.channel.send(DAB + "try that again" + DAB, {tts: tts})
   }
 }
