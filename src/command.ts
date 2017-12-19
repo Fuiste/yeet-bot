@@ -17,6 +17,8 @@ export function runCommand(message: Message, command: string, args?: string) {
     case 'dab':
       say(message, DAB)
       break
+    case 'game':
+      client.user.setGame(args ? args : 'Dick Kickem 2')
     case 'learn':
       learn(message, args)
       break
