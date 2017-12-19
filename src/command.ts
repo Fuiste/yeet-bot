@@ -1,8 +1,9 @@
 import { Message } from 'discord.js'
+import * as isUrl from 'is-url'
 
 import { formatCoin, getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
-import { getMeme } from './util/memes'
+import { addMeme, getMeme } from './util/memes'
 import { learnPhrase } from './util/phrases'
 
 export function runCommand(message: Message, command: string, args?: string) {
@@ -81,7 +82,13 @@ async function meme(message: Message, args?: string) {
       say(message, "Memes are hard right now, try again later")
     }
   } else {
-    console.log(`Adding meme ${args} by ${message.author.toString()}`)
+    console.log(`Adding meme '${args}' by ${message.author.toString()}`)
+    if (isUrl(args)) {
+      addMeme(message.author.toString(), args)
+      say(message, `Thanks ${message.author.toString()}, I'll add that to the meme bank for 7 days.`)
+    } else {
+      say(message, "That isn't a valid URL...")
+    }
   }
 }
 

@@ -8,17 +8,10 @@ export interface Shitpost {
   author: string
 }
 
-const baseMemes: Shitpost[] = [
-  {
-    url: "https://i.imgur.com/UyR5DBH.png",
-    author: "fuiste#1293"
-  }
-]
-
 const client = new RedisClient(PHRASE_PREFIX)
 
 export async function getMeme(): Promise<Shitpost> {
-  let memes = baseMemes
+  let memes: Shitpost[] = []
   try {
     let keys = await client.keys(PHRASE_PREFIX)
 
