@@ -70,7 +70,7 @@ function learn(message: Message, args?: string) {
     message.channel.send("You need to send me a **phrase** and a **response**...")
   } else {
     learnPhrase(newPhrase[0].substring(1, newPhrase[0].length - 1), newPhrase[1].substring(1, newPhrase[1].length - 1))
-    message.react(DAB)
+    say(message, DAB)
   }
 }
 
@@ -87,7 +87,7 @@ async function meme(message: Message, args?: string) {
     console.log(`Adding meme '${args}' by ${message.author.toString()}`)
     if (isUrl(args)) {
       addMeme(message.author.toString(), args)
-      message.react(DAB)
+      say(message, DAB)
     } else {
       say(message, "That isn't a valid URL...")
     }
@@ -98,8 +98,8 @@ function nick(message: Message, args?: string) {
   if (!args) {
     say(message, "You need to give me a nickname...")
   } else {
-    message.react(DAB)
     message.guild.members.get(client.user.id).setNickname(args)
+    say(message, DAB)
   }
 }
 
