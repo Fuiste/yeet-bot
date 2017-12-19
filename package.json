@@ -2,7 +2,7 @@
     "name": "yeet-bot",
     "version": "1.0.0",
     "description": "Dab on them haters",
-    "main": "yeet.js",
+    "main": "dist/yeet.js",
     "scripts": {
         "build": "npm run clean && tsc",
         "build.watch": "npm run clean && tsc --watch",
@@ -11,6 +11,9 @@
     },
     "author": "William Pelrine",
     "dependencies": {
+        "@types/express": "^4.0.39",
+        "@types/redis": "^2.8.3",
+        "@types/superagent": "^3.5.6",
         "discord.js": "^11.2.1",
         "express": "^4.16.2",
         "redis": "^2.8.0",
@@ -18,10 +21,5 @@
         "superagent": "^3.8.2",
         "typescript": "^2.4.2",
         "winston": "^2.4.0"
-    },
-    "devDependencies": {
-        "@types/express": "^4.0.39",
-        "@types/redis": "^2.8.3",
-        "@types/superagent": "^3.5.6"
     }
 }
