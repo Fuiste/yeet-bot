@@ -76,7 +76,7 @@ async function meme(message: Message, args?: string) {
   if (!args) {
     try {
       let meme = await getMeme()
-      message.channel.send(`Submitted by @${meme.author}`, {embed: {image: {url: meme.url}}})
+      message.channel.send(`Submitted by ${meme.author}`, {embed: {image: {url: meme.url}}})
     } catch(e) {
       console.error(e)
       say(message, "Memes are hard right now, try again later")
