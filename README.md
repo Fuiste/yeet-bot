@@ -85,6 +85,8 @@ Returns `OK` if the server is running.
 To run the bot locally, make sure DISCORD_TOKEN is in your path, then run:
 
 ```bash
+brew install redis
+redis-server &
 git clone git@github.com:Fuiste/yeet-bot.git
 cd yeet-bot
 npm install
