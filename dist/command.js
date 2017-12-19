@@ -81,6 +81,7 @@ function meme(message, args) {
         if (!args) {
             try {
                 let meme = yield memes_1.getMeme();
+                console.log(meme);
                 message.channel.sendEmbed({ url: meme.url, description: `Submitted by @${message.author.tag}` });
             }
             catch (e) {
