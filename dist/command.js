@@ -81,15 +81,12 @@ function meme(message, args) {
         if (!args) {
             try {
                 let meme = yield memes_1.getMeme();
-                message.channel.sendEmbed({ url: meme.url, description: `Submitted by ${meme.author}` });
+                message.channel.sendEmbed({ url: meme.url, description: `Submitted by @${message.author.tag}` });
             }
             catch (e) {
                 console.error(e);
                 say(message, "Memes are hard right now, try again later");
             }
-        }
-        else {
-            console.log(message.author.tag);
         }
     });
 }

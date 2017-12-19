@@ -31,6 +31,8 @@ export async function getMeme(): Promise<Shitpost> {
     throw e
   }
 
+  console.log(memes)
+
   return memes[Math.floor(Math.random() * memes.length - 1)]
 }
 
