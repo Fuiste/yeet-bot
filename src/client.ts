@@ -8,7 +8,7 @@ export const client = new Discord.Client();
 // Say hi
 client.on('ready', () => {
   console.log('Dabbing on them haters.')
-  client.user.setGame('Dick Kickem 2: Slapnuts')
+  client.user.setGame('Dick Kickem 2')
 });
   
 // Create an event listener for new guild members
