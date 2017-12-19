@@ -7,6 +7,16 @@ import { DAB } from './util/emoji'
 import { addMeme, getMeme } from './util/memes'
 import { learnPhrase } from './util/phrases'
 
+const HELP: string = "Here's what I can do:\n\n" 
+  + "```\n\!yeet crypto\n```\n\nPrices out the top 10 cryptocurrencies, you can get more specific info on a currency by specifying a name.\n\n"
+  + "```\n\!yeet dab\n```\n\nUhh...\n\n"
+  + "```\n\!yeet game\n```\n\nSet the bot's game\n\n"
+  + "```\n\!yeet learn\n```\n\nLearns a phrase and response for the next 24 hours.  The trigger phrase will be the first quoted string and the response will be the second.\n\n"
+  + "```\n\!yeet meme\n```\n\nEither posts or learns a meme from the vault, with credit to the original submitter.  Memes **must** be URL's.\n\n"
+  + "```\n\!yeet nick\n```\n\nChange the bot's nickname on a given server.  You _need_ to give it the right permissions for this to work.\n\n"
+  + "```\n\!yeet say\n```\n\nSays a thing.\n\n"
+  + "```\n\!yeet yell\n```\n\nLike say, but with text to speech."
+
 export function runCommand(message: Message, command: string, args?: string) {
   console.log('Running "' + command + '" with args:', args || 'none')
 
@@ -20,6 +30,9 @@ export function runCommand(message: Message, command: string, args?: string) {
     case 'game':
       client.user.setGame(args ? args : 'Dick Kickem 2')
       say(message, DAB)
+      break
+    case 'help':
+      say(message, HELP)
       break
     case 'learn':
       learn(message, args)
