@@ -24,30 +24,35 @@ Says a thing
 
 ### crypto
 
-Prices out the top 10 cryptocurrencies, you can get more specific info on a currency by specifying a name, for example:
-
-**Examples:**
+Prices out the top 10 cryptocurrencies, you can get more specific info on a currency by specifying a name.
 
 ```
 !yeet crypto
-!yeet crypto bitcoin
+!yeet crypto dogecoin
 ```
 
 ### learn
 
-Learns a phrase and response for the next 24 hours.
-
-**Example:**
+Learns a phrase and response for the next 24 hours.  The trigger phrase will be the first quoted string and the response will be the second.
 
 ```
 !yeet learn "Is this real life?", "I'm 12 and very scared"
 ```
 
+### meme
+
+Either posts or learns a meme from the vault, with credit to the original submitter.
+
+**Note:** Memes _must_ be URL's at the moment
+
+```
+!yeet meme
+!yeet meme http://www.dankmemes.com/pepe.jpg
+```
+
 ### yell
 
 Like say, but with text to speech.
-
-**Example:**
 
 ```
 !yeet yell Say that to my face not online see what happens
