@@ -19,6 +19,8 @@ export function runCommand(message: Message, command: string, args?: string) {
       break
     case 'game':
       client.user.setGame(args ? args : 'Dick Kickem 2')
+      say(message, DAB)
+      break
     case 'learn':
       learn(message, args)
       break
@@ -26,7 +28,8 @@ export function runCommand(message: Message, command: string, args?: string) {
       meme(message, args)
       break
     case 'nick':
-      nick(message, args)
+      message.guild.members.get(client.user.id).setNickname(args ? args : 'YeetBot')
+      say(message, DAB)
       break
     case 'say':
       say(message, args)
@@ -93,15 +96,6 @@ async function meme(message: Message, args?: string) {
     } else {
       say(message, "That isn't a valid URL...")
     }
-  }
-}
-
-function nick(message: Message, args?: string) {
-  if (!args) {
-    say(message, "You need to give me a nickname...")
-  } else {
-    message.guild.members.get(client.user.id).setNickname(args)
-    say(message, DAB)
   }
 }
 
