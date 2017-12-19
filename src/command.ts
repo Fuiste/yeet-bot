@@ -75,7 +75,6 @@ async function meme(message: Message, args?: string) {
   if (!args) {
     try {
       let meme = await getMeme()
-      console.log(meme)
       message.channel.sendEmbed({url: meme.url, description: `Submitted by @${message.author.tag}`})
     } catch(e) {
       console.error(e)

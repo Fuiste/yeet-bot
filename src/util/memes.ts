@@ -26,14 +26,12 @@ export async function getMeme(): Promise<Shitpost> {
       let match = await client.get(keys[i].substring(PHRASE_PREFIX.length))
       memes.push(JSON.parse(match))
     }
+    
+    return memes[Math.floor(Math.random() * memes.length)]
   } catch(e) {
     console.error(e)
     throw e
   }
-
-  console.log(memes)
-
-  return memes[Math.floor(Math.random() * memes.length - 1)]
 }
 
 export function addMeme(author: string, url: string) {
