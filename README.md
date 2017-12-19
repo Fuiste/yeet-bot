@@ -50,6 +50,14 @@ Either posts or learns a meme from the vault, with credit to the original submit
 !yeet meme http://www.dankmemes.com/pepe.jpg
 ```
 
+### nick
+
+Change the bot's nickname on a given server.  You _need_ to give it the right permissions for this to work.
+
+```
+!yeet nick Bichael Thurston IV
+```
+
 ### yell
 
 Like say, but with text to speech.
