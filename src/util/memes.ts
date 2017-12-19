@@ -11,7 +11,7 @@ export interface Shitpost {
 const baseMemes: Shitpost[] = [
   {
     url: "https://i.imgur.com/UyR5DBH.png",
-    author: "@fuiste#1293"
+    author: "fuiste#1293"
   }
 ]
 

@@ -80,7 +80,9 @@ async function meme(message: Message, args?: string) {
       console.error(e)
       say(message, "Memes are hard right now, try again later")
     }
-  } 
+  } else {
+    console.log(`Adding meme ${args} by ${message.author.tag}`)
+  }
 }
 
 function say(message: Message, note?: string, tts?: boolean) {
