@@ -80,7 +80,7 @@ async function meme(message: Message, args?: string) {
       say(message, "Memes are hard right now, try again later")
     }
   } else {
-    console.log(message.author.id)
+    console.log(message.author.username)
   }
 }
 

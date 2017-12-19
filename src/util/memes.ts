@@ -27,6 +27,7 @@ export async function getMeme(): Promise<Shitpost> {
       memes.push(JSON.parse(match))
     }
   } catch(e) {
+    console.error(e)
     throw e
   }
 

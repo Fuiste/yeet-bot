@@ -88,7 +88,7 @@ function meme(message, args) {
             }
         }
         else {
-            console.log(message.author.id);
+            console.log(message.author.username);
         }
     });
 }

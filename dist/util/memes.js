@@ -29,6 +29,7 @@ function getMeme() {
             }
         }
         catch (e) {
+            console.error(e);
             throw e;
         }
         return memes[Math.floor(Math.random() * memes.length - 1)];
