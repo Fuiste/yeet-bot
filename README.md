@@ -31,6 +31,14 @@ Prices out the top 10 cryptocurrencies, you can get more specific info on a curr
 !yeet crypto dogecoin
 ```
 
+### game
+
+Sets the bot's game.
+
+```
+!yeet game Danza 2: Electric Boogaloo
+```
+
 ### learn
 
 Learns a phrase and response for the next 24 hours.  The trigger phrase will be the first quoted string and the response will be the second.
