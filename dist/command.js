@@ -84,11 +84,12 @@ function meme(message, args) {
                 message.channel.sendEmbed({ url: meme.url, description: `Submitted by ${meme.author}` });
             }
             catch (e) {
+                console.error(e);
                 say(message, "Memes are hard right now, try again later");
             }
         }
         else {
-            console.log(message.author.username);
+            console.log(message.author.tag);
         }
     });
 }
