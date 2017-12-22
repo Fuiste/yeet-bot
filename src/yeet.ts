@@ -23,10 +23,8 @@ router.post('/webhook', (req, res) => {
   res.send('OK')
 })
 
-app.configure(() => {
-  app.use(Express.json)
-  app.use('/', router)
-})
+app.use(Express.json)
+app.use('/', router)
 
 app.listen(PORT, () => {
   console.log("Yeet server is running :)")
