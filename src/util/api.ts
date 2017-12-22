@@ -1,8 +1,14 @@
 import * as request from 'superagent'
 
+export interface ApiHeader {
+  key: string;
+  value: string;
+}
+
 export interface ApiCallConfig {
   method: string;
   body?: any;
+  headers?: ApiHeader[];
 }
 
 export class Api {
@@ -15,6 +21,12 @@ export class Api {
 
     let req = request(config.method, this.host + endpoint)
     req = req.set("Content-type", "application/json")
+
+    if (config.headers) {
+      config.headers.forEach((header) => {
+        req.set(header.key, header.value)
+      })
+    }
 
     if (config.body) {
       req = req.send(config.body)

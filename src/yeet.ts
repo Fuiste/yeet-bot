@@ -16,7 +16,7 @@ router.get('/status', (_, res) => {
 })
   
 router.post('/webhook', (req, res) => {
-  testHook(req.body)
+  testHook(req.body, req.rawHeaders)
   res.status(200)
   res.contentType('text/plain')
   res.send('OK')
