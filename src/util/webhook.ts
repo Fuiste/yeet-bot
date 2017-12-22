@@ -1,7 +1,7 @@
 import { Api, ApiHeader } from './api'
-import { COMMIT_WEBHOOK } from '../environment'
+import { COMMIT_WEBHOOK, DEBUG } from '../environment'
 
-const api = new Api('', true)
+const api = new Api('', DEBUG)
 const GITHUB_HEADERS = [
   'User-Agent',
   'X-Github-Delivery',
