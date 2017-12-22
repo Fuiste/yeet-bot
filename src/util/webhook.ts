@@ -4,8 +4,8 @@ const TEST = 'https://discordapp.com/api/webhooks/393806710172680204/THEF6hEiVh6
 const api = new Api('', true)
 const GITHUB_HEADERS = [
   'User-Agent',
-  'X-GitHub-Delivery',
-  'X-GitHub-Event',
+  'X-Github-Delivery',
+  'X-Github-Event',
   'X-Hub-Signature'
 ]
 
