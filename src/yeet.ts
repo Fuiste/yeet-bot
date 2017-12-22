@@ -1,4 +1,5 @@
 import * as Express from 'express'
+import * as bodyParser from 'body-parser'
 
 import { client } from './client'
 import { DISCORD_TOKEN, PORT } from './environment'
@@ -6,7 +7,8 @@ import { DISCORD_TOKEN, PORT } from './environment'
 // Set up a webserver for monitoring
 const app = Express();
 
-app.disable('x-powered-by');
+app.disable('x-powered-by')
+app.use(bodyParser.json)
 
 app.all('*', (req, res) => {
   if (req.url === '/status') {
