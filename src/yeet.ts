@@ -15,6 +15,13 @@ app.all('*', (req, res) => {
     res.contentType('text/plain')
     res.send("OK")
   }
+
+  if (req.url === '/webhook') {
+    console.log(req.body)
+    res.status(200)
+    res.contentType('text/plain')
+    res.send('OK')
+  }
 })
 
 app.listen(PORT, () => {
