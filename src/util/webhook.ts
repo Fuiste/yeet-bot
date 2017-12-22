@@ -5,6 +5,7 @@ const api = new Api('')
 
 export async function testHook(body: any) {
   try {
+    console.log(body)
     let res = await api.post(TEST, body)
     console.log(res)
   } catch(e) {
