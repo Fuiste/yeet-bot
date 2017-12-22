@@ -23,6 +23,10 @@ export class Api {
     req = req.set("Content-type", "application/json")
 
     if (config.headers) {
+      if (this.debug) {
+        console.log(config.headers)
+      }
+
       config.headers.forEach((header) => {
         req.set(header.key, header.value)
       })
