@@ -28,7 +28,7 @@ export function runCommand(message: Message, command: string, args?: string) {
       say(message, DAB)
       break
     case 'game':
-      client.user.setGame(args ? args : 'Dick Kickem 2')
+      client.user.setGame(args ? args : '\!yeet help')
       say(message, DAB)
       break
     case 'help':
