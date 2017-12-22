@@ -15,6 +15,9 @@ export class Api {
 
     let req = request(config.method, this.host + endpoint)
     if (config.body) {
+      if (this.debug) {
+        console.log(config.body)
+      }
       req = req.send(config.body)
     }
     req = req.set("Content-type", "application/json")
