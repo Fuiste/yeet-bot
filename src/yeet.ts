@@ -19,7 +19,7 @@ app.all('*', (req, res) => {
   }
 
   if (req.url === '/webhook') {
-    console.log(req)
+    console.log(req.body)
     res.status(200)
     res.contentType('text/plain')
     res.send('OK')
