@@ -42,11 +42,11 @@ export async function top10(): Promise<CryptoCurrency[]> {
       let cap_str = '$' + cap
   
       if (cap >= 1000000000) {
-        cap_str = '$' + (cap / 1000000000).toFixed(8) + 'B'
+        cap_str = '$' + (cap / 1000000000).toFixed(7) + 'B'
       } else if (cap >= 1000000) {
-        cap_str = '$' + (cap / 1000000).toFixed(8) + 'M'
+        cap_str = '$' + (cap / 1000000).toFixed(7) + 'M'
       } else {
-        cap_str = '$' + cap.toFixed(9)
+        cap_str = '$' + cap.toFixed(8)
       }
 
       top.push({
