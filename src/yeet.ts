@@ -8,7 +8,7 @@ import { DISCORD_TOKEN, PORT } from './environment'
 const app = Express();
 
 app.disable('x-powered-by')
-app.use(bodyParser.json)
+app.use(bodyParser)
 
 app.all('*', (req, res) => {
   if (req.url === '/status') {
