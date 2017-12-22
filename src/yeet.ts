@@ -2,7 +2,7 @@ import * as Express from 'express'
 
 import { client } from './client'
 import { DISCORD_TOKEN, PORT } from './environment'
-import { testHook } from './util/webhook'
+import { handleGithubWebhook } from './util/webhook'
 
 // Set up a webserver for monitoring
 const app = Express()
@@ -16,7 +16,7 @@ router.get('/status', (_, res) => {
 })
   
 router.post('/webhook', (req, res) => {
-  testHook(req.body, req.rawHeaders)
+  handleGithubWebhook(req.body, req.rawHeaders)
   res.status(200)
   res.contentType('text/plain')
   res.send('OK')
