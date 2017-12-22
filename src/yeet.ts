@@ -4,7 +4,7 @@ import { client } from './client'
 import { DISCORD_TOKEN, PORT } from './environment'
 
 // Set up a webserver for monitoring
-const app = Express();
+const app = Express()
 const router = Express.Router()
 
 app.disable('x-powered-by')
@@ -23,7 +23,7 @@ router.post('/webhook', (req, res) => {
   res.send('OK')
 })
 
-app.use(Express.json)
+app.use(Express.json())
 app.use('/', router)
 
 app.listen(PORT, () => {
