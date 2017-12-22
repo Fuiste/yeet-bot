@@ -3,13 +3,13 @@ import { Api } from './api'
 const api = new Api('https://api.coinmarketcap.com/v1')
 
 export interface CryptoCurrency {
-  change1: string;
-  change24: string;
-  change7: string;
+  one_day: string;
+  seven_day: string;
   name: string;
   rank: number;
   symbol: string;
-  usd: number
+  usd: number;
+  cap: string;
 }
 
 export function formatCoin(coin: CryptoCurrency, column: number, verbose?: boolean): string {
@@ -38,14 +38,25 @@ export async function top10(): Promise<CryptoCurrency[]> {
     let top: CryptoCurrency[] = []
 
     res.forEach(coin => {
+      let cap = coin.market_cap_usd
+      let cap_str = '$' + cap
+  
+      if (cap >= 1000000000) {
+        cap_str = '$' + (cap / 1000000000).toFixed(8) + 'B'
+      } else if (cap >= 1000000) {
+        cap_str = '$' + (cap / 1000000).toFixed(8) + 'M'
+      } else {
+        cap_str = '$' + cap.toFixed(9)
+      }
+
       top.push({
-        change1: coin.percent_change_1h + '%',
-        change24: coin.percent_change_24h + '%',
-        change7: coin.percent_change_7d + '%',
+        one_day: coin.percent_change_24h + '%',
+        seven_day: coin.percent_change_7d + '%',
         name: coin.name,
         rank: coin.rank,
         symbol: coin.symbol,
-        usd: coin.price_usd
+        usd: coin.price_usd,
+        cap: cap_str
       })
     });
 
@@ -59,15 +70,25 @@ export async function getCoin(id: string): Promise<CryptoCurrency> {
   try {
     let coin = await api.get('/ticker/' + id.toLowerCase())
     coin = coin[0]
+    let cap = coin.market_cap_usd
+    let cap_str = '$' + cap
+
+    if (cap >= 1000000000) {
+      cap_str = '$' + (cap / 1000000000).toFixed(8) + 'B'
+    } else if (cap >= 1000000) {
+      cap_str = '$' + (cap / 1000000).toFixed(8) + 'M'
+    } else {
+      cap_str = '$' + cap.toFixed(9)
+    }
 
     return {
-      change1: coin.percent_change_1h + '%',
-      change24: coin.percent_change_24h + '%',
-      change7: coin.percent_change_7d + '%',
+      one_day: coin.percent_change_24h + '%',
+      seven_day: coin.percent_change_7d + '%',
       name: coin.name,
       rank: coin.rank,
       symbol: coin.symbol,
-      usd: coin.price_usd
+      usd: coin.price_usd,
+      cap: cap_str
     }
   } catch(e) {
     throw e
