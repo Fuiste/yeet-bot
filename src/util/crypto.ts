@@ -49,7 +49,7 @@ export function formatCoin(coin: CryptoCurrency, column: number, verbose?: boole
   } else {
     formatted += (coin.rank + '.   ').slice(0, 3)
     formatted += (coin.name + ' '.repeat(column)).slice(0, column - 1)
-    formatted += (' $' + coin.price).slice(0, 9)
+    formatted += (' ' + coin.price).slice(0, 9)
   }
 
   return formatted
