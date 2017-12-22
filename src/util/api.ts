@@ -49,29 +49,33 @@ export class Api {
     }
   }
   
-  del(endpoint: string): Promise<any> {
+  del(endpoint: string, headers?: ApiHeader[]): Promise<any> {
     return this._call(endpoint, {
-      method: 'delete'
+      method: 'delete',
+      headers: headers ? headers : []
     })
   }
   
-  get(endpoint: string): Promise<any> {
+  get(endpoint: string, headers?: ApiHeader[]): Promise<any> {
     return this._call(endpoint, {
-      method: 'get'
+      method: 'get',
+      headers: headers ? headers : []
     })
   }
   
-  post(endpoint: string, body: any): Promise<any> {
+  post(endpoint: string, body: any, headers?: ApiHeader[]): Promise<any> {
     return this._call(endpoint, {
       method: 'post',
-      body: body
+      body: body,
+      headers: headers ? headers : []
     })
   }
   
-  patch(endpoint: string, body: any): Promise<any> {
+  patch(endpoint: string, body: any, headers?: ApiHeader[]): Promise<any> {
     return this._call(endpoint, {
       method: 'patch',
-      body: body
+      body: body,
+      headers: headers ? headers : []
     })
   }
 }
