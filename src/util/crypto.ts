@@ -25,7 +25,7 @@ function marshallCoin(coin: any): CryptoCurrency {
     cap_str = '$' + cap
   }
 
-  let vol = coin["24h_vol_usd"]
+  let vol = coin["24h_volume_usd"]
   let vol_str = '$' + vol
 
   if (vol >= 1000000000) {
