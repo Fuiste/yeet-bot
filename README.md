@@ -80,6 +80,14 @@ Like say, but with text to speech.
 
 Returns `OK` if the server is running.
 
+## `/webhook`
+
+Receives configured webhooks and passes them along to Discord.
+
+### Supported Webhooks
+
+- Github
+
 # Develop
 
 To run the bot locally, make sure DISCORD_TOKEN is in your path, then run:
