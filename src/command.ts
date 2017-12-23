@@ -53,23 +53,18 @@ export function runCommand(message: Message, command: string, args?: string) {
   }
 }
 
-function crypto(message: Message, currency?: string) {
-  if (currency) {
-    getCoin(currency).then((coin) => {
-      say(message, '```\n' + formatCoin(coin, 12, true) + '\n```')
-    }, () => {
-      say(message, "Uh oh... I had some trouble grabbing the info, try again later!")
-    })
-  } else {
-    top10().then((coins) => {
-      let formatted = '```\nTop 10 cryptos:\n\n'
-      coins.forEach(coin => {
-        formatted += formatCoin(coin, 12, false) + '\n'
-      })
-      say(message, formatted + '\n```')
-    }, () => {
-      say(message, "Uh oh... I had some trouble grabbing the info, try again later!")
-    })
+async function crypto(message: Message, currency?: string) {
+  try {
+    if (currency && currency.split(' ')[0] !== 'watch') {
+      say(message, await getCoin(currency))
+    } else if(currency && currency.split(' ')[0] === 'watch') {
+      say(message, "That feature is coming soon...")
+    } else {
+      say(message, await top10())
+    }
+  } catch(e) {
+    console.error(e)
+    say(message, "Uh oh... I had some trouble grabbing the info, try again later!")   
   }
 }
 

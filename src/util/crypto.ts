@@ -68,27 +68,53 @@ export function formatCoin(coin: CryptoCurrency, column: number, verbose?: boole
   return formatted
 }
 
-export async function top10(): Promise<CryptoCurrency[]> {
+export async function top10(): Promise<string> {
   try {
     let res = await api.get('/ticker/?limit=10')
+    let globalRes = await api.get('/global/')
     let top: CryptoCurrency[] = []
+    let formatted = '```Cryptocurrency Overview\n\n'
+    let globalCap = '$' + globalRes.total_market_cap_usd
+    let globalVol = '$' + globalRes.total_24h_volume_usd
+
+    if (globalRes.total_24h_volume_usd >= 1000000000) {
+      globalVol = '$' + (globalRes.total_24h_volume_usd / 1000000000).toFixed(2) + 'B'
+    } else if (globalRes.total_24h_volume_usd >= 1000000) {
+      globalVol = '$' + (globalRes.total_24h_volume_usd / 1000000).toFixed(2) + 'M'
+    }
+
+    if (globalRes.total_market_cap_usd >= 1000000000) {
+      globalCap = '$' + (globalRes.total_market_cap_usd / 1000000000).toFixed(2) + 'B'
+    } else if (globalRes.total_market_cap_usd >= 1000000) {
+      globalCap = '$' + (globalRes.total_market_cap_usd / 1000000).toFixed(2) + 'M'
+    }
+
+    formatted += `Global cap: ${globalCap}\n`
+    formatted += `Global vol: ${globalVol}\n`
 
     res.forEach(coin => {
       top.push(marshallCoin(coin))
     });
 
-    return top
+    formatted += '\nTop 10 cryptos:\n\n'
+    top.forEach(coin => {
+      formatted += formatCoin(coin, 12, false) + '\n'
+    })
+    formatted += '\n```'
+
+    return formatted
   } catch(e) {
     console.error(e)
     throw e
   }
 }
 
-export async function getCoin(id: string): Promise<CryptoCurrency> {
+export async function getCoin(id: string): Promise<string> {
   try {
     let coin = await api.get('/ticker/' + id.toLowerCase())
     coin = coin[0]
-    return marshallCoin(coin)
+
+    return '```\n' + formatCoin(marshallCoin(coin), 12, true) + '\n```'
   } catch(e) {
     console.error(e)
     throw e
