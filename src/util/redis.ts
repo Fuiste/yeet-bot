@@ -31,13 +31,17 @@ export class RedisClient {
     })
   }
 
-  keys(key: string): Promise<string[]> {
+  keys(key: string = ''): Promise<string[]> {
     return new Promise((resolve, reject) => {
-      client.keys(`*${key}*`, (err, res) => {
+      client.keys(`*${this.prefix + key}*`, (err, res) => {
         if (err) {
           reject(err)
         }
-        resolve(res)
+        let parsed = []
+        res.forEach((key) => {
+          parsed.push(key.substring(this.prefix.length))
+        })
+        resolve(parsed)
       })
     })
   }

@@ -26,11 +26,11 @@ export async function handlePhraseTriggers(content: string): Promise<string[]> {
   }
 
   try {
-    let keys = await client.keys(PHRASE_PREFIX)
+    let keys = await client.keys()
 
     for (let i in keys) {
-      if (content.toLowerCase().includes(keys[i].substring(PHRASE_PREFIX.length).toLowerCase())) {
-        let match = await client.get(keys[i].substring(PHRASE_PREFIX.length))
+      if (content.toLowerCase().includes(keys[i].toLowerCase())) {
+        let match = await client.get(keys[i])
         resps.push(match)
       }
     }

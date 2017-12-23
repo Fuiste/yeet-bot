@@ -13,10 +13,10 @@ const client = new RedisClient(PHRASE_PREFIX)
 export async function getMeme(): Promise<Shitpost> {
   let memes: Shitpost[] = []
   try {
-    let keys = await client.keys(PHRASE_PREFIX)
+    let keys = await client.keys()
 
     for (let i in keys) {
-      let match = await client.get(keys[i].substring(PHRASE_PREFIX.length))
+      let match = await client.get(keys[i])
       memes.push(JSON.parse(match))
     }
     return memes[Math.floor(Math.random() * new Date().getTime() * memes.length) % memes.length]
