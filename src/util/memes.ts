@@ -19,8 +19,7 @@ export async function getMeme(): Promise<Shitpost> {
       let match = await client.get(keys[i].substring(PHRASE_PREFIX.length))
       memes.push(JSON.parse(match))
     }
-    
-    return memes[(Math.random() * new Date().getTime() * memes.length) % memes.length]
+    return memes[Math.floor(Math.random() * new Date().getTime() * memes.length) % memes.length]
   } catch(e) {
     console.error(e)
     throw e
