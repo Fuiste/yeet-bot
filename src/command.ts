@@ -50,6 +50,10 @@ export function runCommand(message: Message, command: string, args?: string) {
     case 'yell':
       say(message, args, true)
       break
+    default:
+      say(message, "I don't recognize that command...")
+      say(message, HELP)
+      break
   }
 }
 
