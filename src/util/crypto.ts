@@ -22,7 +22,7 @@ function marshallCoin(coin: any): CryptoCurrency {
   } else if (cap >= 1000000) {
     cap_str = '$' + (cap / 1000000).toFixed(2) + 'M'
   } else {
-    cap_str = '$' + cap.toFixed(9)
+    cap_str = '$' + cap
   }
 
   let vol = coin["24h_vol_usd"]
@@ -33,7 +33,7 @@ function marshallCoin(coin: any): CryptoCurrency {
   } else if (vol >= 1000000) {
     vol_str = '$' + (vol / 1000000).toFixed(2) + 'M'
   } else {
-    vol_str = '$' + vol.toFixed(9)
+    vol_str = '$' + vol
   }
 
   return {
@@ -79,6 +79,7 @@ export async function top10(): Promise<CryptoCurrency[]> {
 
     return top
   } catch(e) {
+    console.error(e)
     throw e
   }
 }
@@ -89,6 +90,7 @@ export async function getCoin(id: string): Promise<CryptoCurrency> {
     coin = coin[0]
     return marshallCoin(coin)
   } catch(e) {
+    console.error(e)
     throw e
   }
 }
