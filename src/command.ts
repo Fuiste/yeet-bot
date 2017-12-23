@@ -2,7 +2,7 @@ import { Message } from 'discord.js'
 import * as isUrl from 'is-url'
 
 import { client } from './client'
-import { formatCoin, getCoin, top10 } from './util/crypto'
+import { getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
 import { addMeme, getMeme } from './util/memes'
 import { learnPhrase } from './util/phrases'
