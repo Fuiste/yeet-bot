@@ -3,13 +3,14 @@ import { Api } from './api'
 const api = new Api('https://api.coinmarketcap.com/v1')
 
 export interface CryptoCurrency {
+  symbol: string;
   one_day: string;
   seven_day: string;
   name: string;
   rank: number;
-  symbol: string;
   price: string;
   cap: string;
+  vol_24h: string;
 }
 
 function marshallCoin(coin: any): CryptoCurrency {
@@ -24,6 +25,17 @@ function marshallCoin(coin: any): CryptoCurrency {
     cap_str = '$' + cap.toFixed(9)
   }
 
+  let vol = coin["24h_vol_usd"]
+  let vol_str = '$' + vol
+
+  if (vol >= 1000000000) {
+    vol_str = '$' + (vol / 1000000000).toFixed(2) + 'B'
+  } else if (vol >= 1000000) {
+    vol_str = '$' + (vol / 1000000).toFixed(2) + 'M'
+  } else {
+    vol_str = '$' + vol.toFixed(9)
+  }
+
   return {
     one_day: coin.percent_change_24h + '%',
     seven_day: coin.percent_change_7d + '%',
@@ -31,7 +43,8 @@ function marshallCoin(coin: any): CryptoCurrency {
     rank: coin.rank,
     symbol: coin.symbol,
     price: '$' + coin.price_usd,
-    cap: cap_str
+    cap: cap_str,
+    vol_24h: vol_str
   }
 }
 
@@ -40,9 +53,9 @@ export function formatCoin(coin: CryptoCurrency, column: number, verbose?: boole
   const spaces = ' '.repeat(column)
 
   if (verbose) {
-    formatted += coin.name + ', rank ' + coin.rank + '\n'
+    formatted += coin.name + ' (' + coin.symbol + ')\nRank ' + coin.rank + '\n'
     for (const key of Object.keys(coin)) {
-      if (key !== 'rank' && key !== 'name') {
+      if (key !== 'rank' && key !== 'name' && key !== 'symbol') {
         formatted += '\n' + (key + spaces).slice(0, column - 1) + (coin[key] + spaces).slice(0, column - 1)
       }
     }
