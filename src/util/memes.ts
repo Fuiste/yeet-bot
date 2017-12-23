@@ -20,7 +20,7 @@ export async function getMeme(): Promise<Shitpost> {
       memes.push(JSON.parse(match))
     }
     
-    return memes[Math.floor(Math.random() * memes.length)]
+    return memes[(Math.random() * new Date().getTime() * memes.length) % memes.length]
   } catch(e) {
     console.error(e)
     throw e
