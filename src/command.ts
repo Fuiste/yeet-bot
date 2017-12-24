@@ -47,6 +47,9 @@ export function runCommand(message: Message, command: string, args?: string) {
     case 'say':
       say(message, args)
       break
+    case 'quote':
+      quote(message, args)
+      break
     case 'yell':
       say(message, args, true)
       break
@@ -117,4 +120,12 @@ function say(message: Message, note?: string, tts?: boolean) {
   } else {
     message.channel.send(DAB + "try that again" + DAB, {tts: tts})
   }
+}
+
+async function quote(message: Message, user: string) {
+  let msgs = await message.channel.fetchMessages({limit: 10})
+  msgs.forEach((m) => {
+    console.log(`Looking for ${user}...`)
+    console.log(`${m.author.tag} said, '${m.content}'`)
+  })
 }
