@@ -126,13 +126,17 @@ function say(message: Message, note?: string, tts?: boolean) {
 async function quote(message: Message, user?: string) {
   if (user) {
     let msgs = await message.channel.fetchMessages({limit: 10})
+    let msg: Message = null
     msgs.forEach((m) => {
-      if (m.author.toString() === user) {
-        addQuote(user, m.content)
-        say(message, DAB)
-        return
+      if (m.author.toString() === user && !msg) {
+        msg = m
       }
     })
+
+    if (msg) {
+      addQuote(user, msg.content)
+      say(message, DAB)
+    }
   } else {
     let quote = await getQuote()
     say(message, '```\n' + quote.text + '\n```\n\n' + quote.author + ' on ' + quote.date)
