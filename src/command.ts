@@ -5,8 +5,8 @@ import { client } from './client'
 import { getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
 import { addMeme, getMeme } from './util/memes'
-import { addQuote, getQuote } from './util/quotes'
 import { learnPhrase } from './util/phrases'
+import { addQuote, getQuote } from './util/quotes'
 
 const HELP: string = "Here's what I can do:\n\n" 
   + "`\!yeet crypto` Prices out the top 10 cryptocurrencies, you can get more specific info on a currency by specifying a name.\n\n"
