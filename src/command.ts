@@ -5,6 +5,7 @@ import { client } from './client'
 import { getCoin, top10 } from './util/crypto'
 import { DAB } from './util/emoji'
 import { addMeme, getMeme } from './util/memes'
+import { addQuote, getQuote } from './util/quotes'
 import { learnPhrase } from './util/phrases'
 
 const HELP: string = "Here's what I can do:\n\n" 
@@ -122,10 +123,19 @@ function say(message: Message, note?: string, tts?: boolean) {
   }
 }
 
-async function quote(message: Message, user: string) {
-  let msgs = await message.channel.fetchMessages({limit: 10})
-  msgs.forEach((m) => {
-    console.log(`Looking for ${user}...`)
-    console.log(`${m.author.tag} said, '${m.content}'`)
-  })
+async function quote(message: Message, user?: string) {
+  if (user) {
+    let msgs = await message.channel.fetchMessages({limit: 10})
+    msgs.forEach((m) => {
+      if (m.author.toString() === user) {
+        addQuote(user, m.content)
+        say(message, DAB)
+        return
+      }
+    })
+  } else {
+    let quote = await getQuote()
+    let now = new Date()
+    say(message, '```\n' + quote.text + '\n```\n\n' + quote.author + ' on ' + now.toString())
+  }
 }
