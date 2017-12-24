@@ -135,7 +135,6 @@ async function quote(message: Message, user?: string) {
     })
   } else {
     let quote = await getQuote()
-    let now = new Date()
-    say(message, '```\n' + quote.text + '\n```\n\n' + quote.author + ' on ' + now.toString())
+    say(message, '```\n' + quote.text + '\n```\n\n' + quote.author + ' on ' + quote.date)
   }
 }

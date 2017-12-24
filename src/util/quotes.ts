@@ -1,3 +1,5 @@
+import * as dateFormat from 'dateformat'
+
 import { RedisClient } from './redis'
 
 const PHRASE_PREFIX = 'quotations_'
@@ -6,6 +8,7 @@ const WEEK = 60 * 60 * 24 * 7
 export interface Quote {
   text: string
   author: string
+  date: string
 }
 
 const client = new RedisClient(PHRASE_PREFIX)
@@ -28,9 +31,12 @@ export async function getQuote(): Promise<Quote> {
 
 export function addQuote(author: string, text: string) {
   let key = Math.random().toString(36).substring(7)
+  let now = new Date()
+  let nowString = dateFormat(now, "dddd, mmmm dS, yyyy, h:MM:ss TT")
   let post: Quote = {
     author: author,
-    text: text
+    text: text,
+    date: nowString
   }
   client.setCached(key, JSON.stringify(post), WEEK)        
 }
