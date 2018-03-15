@@ -17,6 +17,7 @@ const HELP: string = "Here's what I can do:\n\n"
   + "`\!yeet nick` Change the bot's nickname on a given server.  You _need_ to give it the right permissions for this to work.\n\n"
   + "`\!yeet say` Says a thing.\n\n"
   + "`\!yeet yell` Like say, but with text to speech."
+  + "`\!yeet shitpost` Markov chain for the Text Channel"
 
 export function runCommand(message: Message, command: string, args?: string) {
   console.log('Running "' + command + '" with args:', args || 'none')
@@ -53,6 +54,9 @@ export function runCommand(message: Message, command: string, args?: string) {
       break
     case 'yell':
       say(message, args, true)
+      break
+    case 'shitpost':
+      shitpost(message)
       break
     default:
       say(message, "I don't recognize that command...")
@@ -141,4 +145,26 @@ async function quote(message: Message, user?: string) {
     let quote = await getQuote()
     say(message, '```\n' + quote.text + '\n```\n\n' + quote.author + ' on ' + quote.date)
   }
+}
+
+async function shitpost(message: Message) {
+  const MarkovGen = require('markov-generator');
+  let data = []
+  let msgs = await message.channel.fetchMessages({limit: 100})
+
+  for( var i = 0; i < 20; i++) {
+    msgs.forEach((m) => {
+      if (!(m.author.username === "YeetBot"))
+      {
+          data.push(m.toString())
+      }
+    })
+    msgs = await message.channel.fetchMessages({limit: 100, before: msgs.last().id})
+  }
+  let markov = new MarkovGen({
+    input: data,
+    minLength: 15
+  });
+  let sentence = markov.makeChain();
+  say(message, sentence)
 }
