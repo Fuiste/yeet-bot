@@ -56,7 +56,7 @@ export function runCommand(message: Message, command: string, args?: string) {
       say(message, args, true)
       break
     case 'shitpost':
-      shitpost(message)
+      shitpost(message, args)
       break
     default:
       say(message, "I don't recognize that command...")
@@ -147,24 +147,49 @@ async function quote(message: Message, user?: string) {
   }
 }
 
-async function shitpost(message: Message) {
+async function shitpost(message: Message, user?: string) {
   const MarkovGen = require('markov-generator');
   let data = []
+  let sentence = ""
   let msgs = await message.channel.fetchMessages({limit: 100})
 
-  for( var i = 0; i < 20; i++) {
+  let usernameStripped = user.substring(2,user.length-1)
+  if ( usernameStripped.charAt(0) === "!") {
+    usernameStripped = usernameStripped.substring(1,usernameStripped.length)
+  }
+
+  for( var i = 0; i < 15; i++) {
     msgs.forEach((m) => {
-      if (!(m.author.username === "YeetBot"))
-      {
+      if (user) {
+        if (m.author.id === usernameStripped ) {
           data.push(m.toString())
+        }
+      }
+      else if (!(m.author.username === "YeetBot") ) {
+        data.push(m.toString())
       }
     })
-    msgs = await message.channel.fetchMessages({limit: 100, before: msgs.last().id})
+    try {
+      msgs = await message.channel.fetchMessages({limit: 100, before: msgs.last().id})
+    }
+    catch {
+      break
+    }
   }
-  let markov = new MarkovGen({
-    input: data,
-    minLength: 15
-  });
-  let sentence = markov.makeChain();
-  say(message, sentence)
+  
+  if ( data.length === 0 ) {
+    sentence = "Error creating shitpost"
+    say(message, sentence )
+  }
+  else {
+    let markov = new MarkovGen({
+      input: data,
+      minLength: 7
+    });
+    sentence = markov.makeChain();
+    if(user.length === 0) { 
+      user = "YeetBot#9990"
+    }
+    say(message, '```\n' + sentence + '\n```\n' + user )
+  }
 }
