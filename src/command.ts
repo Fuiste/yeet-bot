@@ -147,21 +147,35 @@ async function quote(message: Message, user?: string) {
   }
 }
 
-async function shitpost(message: Message, user?: string) {
+async function shitpost(message: Message, argument?: string) {
   const MarkovGen = require('markov-generator');
   let data = []
   let sentence = ""
   let msgs = await message.channel.fetchMessages({limit: 100})
-
-  let usernameStripped = user.substring(2,user.length-1)
-  if ( usernameStripped.charAt(0) === "!") {
-    usernameStripped = usernameStripped.substring(1,usernameStripped.length)
+  let usernameStripped = ""
+  let keyword = ""
+  let user = ""
+  if(argument.charAt(0) === "<"){
+    user = argument;
+    usernameStripped = argument.substring(2,argument.length-1)
+    if ( usernameStripped.charAt(0) === "!") {
+      usernameStripped = usernameStripped.substring(1,usernameStripped.length)
+    }
   }
+  else {
+    keyword = argument
+  }
+  
 
-  for( var i = 0; i < 15; i++) {
+  for( var i = 0; i < 20; i++) {
     msgs.forEach((m) => {
       if (user) {
         if (m.author.id === usernameStripped ) {
+          data.push(m.toString())
+        }
+      }
+      else if (keyword) {
+        if (m.toString().includes(keyword)){
           data.push(m.toString())
         }
       }
@@ -176,7 +190,7 @@ async function shitpost(message: Message, user?: string) {
       break
     }
   }
-  
+
   if ( data.length === 0 ) {
     sentence = "Error creating shitpost"
     say(message, sentence )
@@ -188,8 +202,8 @@ async function shitpost(message: Message, user?: string) {
     });
     sentence = markov.makeChain();
     if(user.length === 0) { 
-      user = "YeetBot#9990"
+      user = "<@390535530800218115>"
     }
-    say(message, '```\n' + sentence + '\n```\n' + user )
+    say(message, '\n' + sentence + '\n' + user )
   }
 }
