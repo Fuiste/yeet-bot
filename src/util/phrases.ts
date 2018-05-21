@@ -6,7 +6,8 @@ const PHRASE_PREFIX = 'triggerphrase_'
 const phrases = {
   "yeet": DAB,
   "energy": "༼ つ ◕_◕ ༽つ TAKE MY ENERGY ༼ つ ◕_◕ ༽つ",
-  "fampai": ":3 notice me senpai :3"
+  "fampai": ":3 notice me senpai :3",
+  "succ": "°°°·.°·..·°¯°·._.· 𝕊 𝕌 ℂ ℂ ·._.·°¯°·.·° .·°°°"
 }
 
 const client = new RedisClient(PHRASE_PREFIX)
