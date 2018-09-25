@@ -16,7 +16,8 @@ const HELP: string = "Here's what I can do:\n\n"
   + "`\!yeet meme` Either posts or learns a meme from the vault, with credit to the original submitter.  Memes **must** be URL's.\n\n"
   + "`\!yeet nick` Change the bot's nickname on a given server.  You _need_ to give it the right permissions for this to work.\n\n"
   + "`\!yeet say` Says a thing.\n\n"
-  + "`\!yeet shitpost` Markov chain for the Text Channel\n\n"
+  + "`\!yeet shitpost` Markov chain for the Text Channel.\n\n"
+  + "`\!yeet beperson` Markov chain for Jordan Beperson.\n\n"
   + "`\!yeet yell` Like say, but with text to speech."
 
 export function runCommand(message: Message, command: string, args?: string) {
@@ -57,6 +58,9 @@ export function runCommand(message: Message, command: string, args?: string) {
       break
     case 'shitpost':
       shitpost(message, args)
+      break
+    case 'beperson':
+      beperson(message, args)
       break
     default:
       say(message, "I don't recognize that command...")
@@ -205,5 +209,42 @@ async function shitpost(message: Message, argument?: string) {
       user = "<@390535530800218115>"
     }
     say(message, '\n' + sentence + '\n' + user )
+  }
+}
+
+async function beperson(message: Message, argument?: string) {
+  const MarkovGen = require('markov-generator');
+  let fs = require("fs");
+  const path = require("path");
+  let data = []
+  let sentence = ""
+  let msgs = []
+  let keyword = argument
+
+  let text = fs.readFileSync(path.resolve(__dirname, '../src/text/beperson.txt')).toString('utf-8');
+  msgs = text.split("\n");
+
+  msgs.forEach((m) => {
+    if (keyword) {
+      if (m.toString().includes(keyword)){
+        data.push(m.toString())
+      }
+    }
+    else {
+      data.push(m.toString())
+    }
+  })
+
+  if ( data.length === 0 ) {
+    sentence = "Error creating shitpost"
+    say(message, sentence )
+  }
+  else {
+    let markov = new MarkovGen({
+      input: data,
+      minLength: 7
+    });
+    sentence = markov.makeChain();
+    say(message, '\n' + sentence + '\n' + "-:regional_indicator_j:ordan :b:eperson-" )
   }
 }
